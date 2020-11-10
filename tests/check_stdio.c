@@ -58,11 +58,8 @@ START_TEST(test_reading_file_size) {
 } END_TEST
 
 Suite *stdio_suite(void) {
-	Suite *suite;
-	TCase *tcase;
-
-	suite = suite_create("I/O Standard Library");
-	tcase = tcase_create("Core");
+	Suite *suite = suite_create("I/O Standard Library");
+	TCase *tcase = tcase_create("Core");
 
 	tcase_add_test(tcase, test_reading_file_content);
 	tcase_add_test(tcase, test_reading_file_size);

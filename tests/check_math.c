@@ -7,11 +7,8 @@ START_TEST(test_log_two) {
 } END_TEST
 
 Suite *math_suite(void) {
-    Suite *suite;
-    TCase *tcase;
-
-    suite = suite_create("Math Standard Library");
-    tcase = tcase_create("Core");
+    Suite *suite = suite_create("Math Standard Library");
+    TCase *tcase = tcase_create("Core");
 
     tcase_add_test(tcase, test_log_two);
     suite_add_tcase(suite, tcase);

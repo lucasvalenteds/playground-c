@@ -5,11 +5,8 @@
 
 int main(void) {
     int no_failed = 0;
-    Suite *suite;
-    SRunner *runner;
-
-    suite = suite_create("");
-    runner = srunner_create(suite);
+    Suite *suite = suite_create("");
+    SRunner *runner = srunner_create(suite);
 
     srunner_add_suite(runner, math_suite());
     srunner_add_suite(runner, stdio_suite());
