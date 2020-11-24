@@ -1,8 +1,6 @@
 #include <check.h>
 #include <stdio.h>
 #include "tests/check_language.c"
-#include "tests/check_math.c"
-#include "tests/check_stdio.c"
 #include "tests/check_stdlib.c"
 
 int main(void) {
@@ -11,8 +9,6 @@ int main(void) {
     SRunner *runner = srunner_create(suite);
 
     srunner_add_suite(runner, language_suite());
-    srunner_add_suite(runner, math_suite());
-    srunner_add_suite(runner, stdio_suite());
     srunner_add_suite(runner, stdlib_suite());
 
     srunner_run_all(runner, CK_NORMAL);
