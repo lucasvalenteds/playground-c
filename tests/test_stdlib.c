@@ -33,7 +33,7 @@ START_TEST(test_changing_string_case_to_lowercase) {
 	}
 
 	ck_assert_str_eq("hell0", lowercase_word);
-	ck_assert_msg(isupper(upercase_word[0]), "First letter should be lowercase");
+	ck_assert_msg(isupper(upercase_word[0]), "First letter should be uppercase");
 } END_TEST
 
 START_TEST(test_reading_file_content) {
