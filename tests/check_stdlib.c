@@ -1,4 +1,5 @@
 #include <check.h>
+#include <ctype.h>
 #include <errno.h>
 #include <linux/limits.h>
 #include <stdio.h>
@@ -9,6 +10,30 @@
 
 START_TEST(test_log_two) {
 	ck_assert_int_eq(log2(16), 4);
+} END_TEST
+
+START_TEST(test_changing_string_case_to_uppercase) {
+	char lowercase_word[] = "heLLo";
+	char uppercase_word[sizeof(lowercase_word)] = "";
+
+	for (int i = 0; i < sizeof(lowercase_word); i++) {
+		uppercase_word[i] = toupper(lowercase_word[i]);
+	}
+
+	ck_assert_str_eq("HELLO", uppercase_word);
+	ck_assert_msg(islower(lowercase_word[0]), "First letter should be lowercase");
+} END_TEST
+
+START_TEST(test_changing_string_case_to_lowercase) {
+	char upercase_word[] = "HEll0";
+	char lowercase_word[sizeof(upercase_word)] = "";
+
+	for (int i = 0; i < sizeof(upercase_word); i++) {
+		lowercase_word[i] = tolower(upercase_word[i]);
+	}
+
+	ck_assert_str_eq("hell0", lowercase_word);
+	ck_assert_msg(isupper(upercase_word[0]), "First letter should be lowercase");
 } END_TEST
 
 START_TEST(test_reading_file_content) {
@@ -86,6 +111,8 @@ Suite *stdlib_suite(void) {
 	TCase *tcase = tcase_create("Core");
 
 	tcase_add_test(tcase, test_log_two);
+	tcase_add_test(tcase, test_changing_string_case_to_uppercase);
+	tcase_add_test(tcase, test_changing_string_case_to_lowercase);
 	tcase_add_test(tcase, test_reading_file_content);
 	tcase_add_test(tcase, test_reading_file_size);
 	tcase_add_test(tcase, test_generating_random_number);
