@@ -3,6 +3,7 @@
 #include "tests/check_language.c"
 #include "tests/check_math.c"
 #include "tests/check_stdio.c"
+#include "tests/check_stdlib.c"
 
 int main(void) {
     int no_failed = 0;
@@ -12,6 +13,7 @@ int main(void) {
     srunner_add_suite(runner, language_suite());
     srunner_add_suite(runner, math_suite());
     srunner_add_suite(runner, stdio_suite());
+    srunner_add_suite(runner, stdlib_suite());
 
     srunner_run_all(runner, CK_NORMAL);
     no_failed = srunner_ntests_failed(runner);
