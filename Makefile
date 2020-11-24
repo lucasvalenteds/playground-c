@@ -4,7 +4,7 @@ COMPILER_FLAGS = -c -Wall
 LIBRARIES = -lcheck -lsubunit -lrt -lm -lpthread
 
 TESTS = language stdlib
-TEST_FILES = $(addsuffix .c, $(addprefix check_, $(TESTS)))
+TEST_FILES = $(addsuffix .c, $(addprefix test_, $(TESTS)))
 TEST_DIR = $(addprefix tests/, $(TEST_FILES))
 
 MAIN = main
