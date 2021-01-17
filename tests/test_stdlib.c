@@ -87,6 +87,17 @@ START_TEST(test_reading_file_size) {
 	fclose(file);
 } END_TEST
 
+START_TEST(test_reading_file_error_handling) {
+	const char *name = "unknown-file.txt";
+	const char *mode = "r";
+
+	FILE *file = fopen(name, mode);
+	const char *error_message = strerror(errno);
+
+	ck_assert_ptr_null(file);
+	ck_assert_str_eq(error_message, "No such file or directory");
+} END_TEST
+
 START_TEST(test_generating_random_number) {
 	srand(time(NULL));
 
@@ -115,6 +126,7 @@ Suite *stdlib_suite(void) {
 	tcase_add_test(tcase, test_changing_string_case_to_lowercase);
 	tcase_add_test(tcase, test_reading_file_content);
 	tcase_add_test(tcase, test_reading_file_size);
+	tcase_add_test(tcase, test_reading_file_error_handling);
 	tcase_add_test(tcase, test_generating_random_number);
 	tcase_add_test(tcase, test_generating_random_number_between_zero_and_n);
 	suite_add_tcase(suite, tcase);
