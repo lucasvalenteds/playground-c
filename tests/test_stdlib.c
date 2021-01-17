@@ -98,6 +98,38 @@ START_TEST(test_reading_file_error_handling) {
 	ck_assert_str_eq(error_message, "No such file or directory");
 } END_TEST
 
+START_TEST(test_writing_new_file) {
+	char current_work_directory[PATH_MAX];
+	ck_assert_msg(
+			getcwd(current_work_directory, sizeof(current_work_directory)) != NULL,
+			"Error while getting current work directory: %s", strerror(errno));
+
+	char filename[PATH_MAX] = "";
+	strcat(filename, current_work_directory);
+	strcat(filename, "/resources/new-empty-file.txt");
+
+	FILE *file;
+
+	file = fopen(filename, "w");
+	ck_assert_msg(
+			file != NULL,
+			"Error while creating a new empty file: %s", strerror(errno));
+	fclose(file);
+
+	file = fopen(filename, "r");
+	ck_assert_msg(
+			fseek(file, 0, SEEK_END) == 0,
+			"The new file created should be empty");
+	ck_assert_msg(
+			file != NULL,
+			"Error while reading a new empty file: %s", strerror(errno));
+	fclose(file);
+
+	ck_assert_msg(
+			remove(filename) == 0,
+			"Error while removing a new empty file: %s", strerror(errno));
+} END_TEST
+
 START_TEST(test_generating_random_number) {
 	srand(time(NULL));
 
@@ -127,6 +159,7 @@ Suite *stdlib_suite(void) {
 	tcase_add_test(tcase, test_reading_file_content);
 	tcase_add_test(tcase, test_reading_file_size);
 	tcase_add_test(tcase, test_reading_file_error_handling);
+	tcase_add_test(tcase, test_writing_new_file);
 	tcase_add_test(tcase, test_generating_random_number);
 	tcase_add_test(tcase, test_generating_random_number_between_zero_and_n);
 	suite_add_tcase(suite, tcase);
