@@ -23,3 +23,6 @@ test:
 
 clean:
 	@rm $(MAIN_BIN) *.o
+
+format:
+	@clang-format -i --style="{BasedOnStyle: llvm, IndentWidth: 4}" **/*.c
