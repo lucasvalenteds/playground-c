@@ -9,7 +9,8 @@ START_TEST(test_iterating_array_using_pointers) {
     }
 
     ck_assert_str_eq("PINEAPPLE", word_uppercased);
-} END_TEST
+}
+END_TEST
 
 Suite *language_suite(void) {
     Suite *suite = suite_create("Language features");

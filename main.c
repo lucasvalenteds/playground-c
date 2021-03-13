@@ -1,7 +1,7 @@
-#include <check.h>
-#include <stdio.h>
 #include "tests/test_language.c"
 #include "tests/test_stdlib.c"
+#include <check.h>
+#include <stdio.h>
 
 int main(void) {
     int no_failed = 0;
